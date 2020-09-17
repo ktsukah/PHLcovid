@@ -1,0 +1,32 @@
+---
+title: 'Sep 17 Synchronous Session'
+author: 'Data Science for Biomedical Informatics (BMIN503/EPID600)'
+output: 
+  html_document:
+    theme: cerulean
+    highlight: pygments
+---
+
+***
+
+### COVID in Philadelphia
+
+1. Load data frames called `covid.jul` and `covid.aug` corresponding to covid test results reported by the Philadelphia Department of Public Health on July 7 and August 11, 2020 that are in files `phl_covid_tests_7.7.20.txt` and `phl_covid_tests_8.11.20.txt`, respectively.
+
+```{r, eval = TRUE}
+```
+
+2. How many COVID-19 test results had been reported in Philadelphia by August 11? 
+```{r, eval = TRUE}
+```
+
+3. What zip code had the greatest number of positive tests by August 11?
+```{r, eval = TRUE}
+```
+
+4. Create a function `most.neg` that returns the zip code with the greatest number of negative tests along with that number as a data frame. Use the function to get this output for July 7 and Aug 11.
+```{r, eval = TRUE}
+```
+
+
+***
