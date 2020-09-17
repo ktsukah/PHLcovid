@@ -14,18 +14,48 @@ output:
 1. Load data frames called `covid.jul` and `covid.aug` corresponding to covid test results reported by the Philadelphia Department of Public Health on July 7 and August 11, 2020 that are in files `phl_covid_tests_7.7.20.txt` and `phl_covid_tests_8.11.20.txt`, respectively.
 
 ```{r, eval = TRUE}
+covid.jul <- read.table(file = "phl_covid_tests_7.7.20.txt", header = TRUE, sep = "\t", skip = 0, na.strings = NA, nrows = -1)
+covid.aug <- read.table(file = "phl_covid_tests_8.11.20.txt", header = TRUE, sep = "\t", skip = 0, na.strings = NA, nrows = -1)
 ```
 
 2. How many COVID-19 test results had been reported in Philadelphia by August 11? 
 ```{r, eval = TRUE}
+total.count <- function(x){
+  y <- sum(x$count)
+  paste0("The total number of test results reported in Philadelphia is ", y)
+}
+
+total.count(covid.aug)
 ```
 
 3. What zip code had the greatest number of positive tests by August 11?
 ```{r, eval = TRUE}
+find.max.pos <- function(x){
+  maxpos <- max(x$count[x$covid_status == "POS"])
+  maxzip <- x[x$covid_status == "POS", ][which.max(x[x$covid_status == "POS", "count"]),"zip_code"]
+  
+  paste0("Zip code with most positive cases was ", maxzip, " with ", maxpos, " cases.")
+}
+
+find.max.pos(covid.aug)
+
 ```
 
 4. Create a function `most.neg` that returns the zip code with the greatest number of negative tests along with that number as a data frame. Use the function to get this output for July 7 and Aug 11.
 ```{r, eval = TRUE}
+most.neg <- function(x){
+  maxneg <- max(x$count[x$covid_status == "NEG"])
+  maxzip <- x[x$covid_status == "NEG", ][which.max(x[x$covid_status == "NEG", "count"]),"zip_code"]
+  
+  print(paste0("Zip code with most negative cases was ", maxzip, " with ", maxneg, " cases."))
+  
+  df <- data.frame(maxzip, maxneg)
+  colnames(df) <- c("zip_code","count")
+  return(df)
+}
+
+aug.df <- most.neg(covid.aug)
+jul.df <- most.neg(covid.jul)
 ```
 
 
